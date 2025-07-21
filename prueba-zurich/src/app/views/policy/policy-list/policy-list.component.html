@@ -1,0 +1,153 @@
+<div class="policy-container">
+  <c-row>
+    <c-col xs="12">
+      <c-card class="mb-4 shadow-sm">
+        
+        <!-- Toast para mensajes -->
+        <c-toaster position="top-end">
+          <c-toast *ngIf="showToast" [autohide]="true" [color]="toastColor" delay="5000" [visible]="showToast">
+            <c-toast-body>{{ toastMessage }}</c-toast-body>
+          </c-toast>
+        </c-toaster>
+        <c-card-header >
+          <div class="d-flex justify-content-between align-items-center">
+            <h5 class="mb-0">
+              <strong>Listado de Pólizas</strong>
+            </h5>
+            <input *ngIf="userRol !== 'Cliente'" cButton class="me-1" color="primary" type="button" value="Emitir póliza" (click)="router.navigate(['/policy/form'])">
+          </div>
+        </c-card-header>
+
+        <c-card-body>
+          <!-- Sección de Filtros -->
+          <div class="filter-section mb-4 p-3 rounded-3">
+            <c-row class="g-3">
+              <c-col md="4">
+                <label for="numeroPolizaFilter" class="form-label fw-bold">N° Póliza</label>
+                <input
+                  type="text"
+                  id="numeroPolizaFilter"
+                  class="form-control"
+                  [(ngModel)]="filters['NumeroPoliza']"
+                  placeholder="Ej: POL-1001"
+                />
+              </c-col>
+
+              <c-col *ngIf="userRol !== 'Cliente'" md="4">
+                <label class="form-label fw-bold">ID Cliente</label>
+                <input 
+                  type="number" 
+                  class="form-control"
+                  [(ngModel)]="filters.ClienteId"
+                  placeholder="ID de cliente"
+                />
+              </c-col>
+              
+              <c-col md="4">
+                <label class="form-label fw-bold">Tipo de Póliza</label>
+                <select
+                  [(ngModel)]="filters.TipoPolizaId"
+                  class="form-select"
+                >
+                  <option *ngFor="let type of policyTypes" [value]="type.tipoPolizaId">
+                    {{ type.nombre }}
+                  </option>
+                </select>
+              </c-col>
+            
+
+              <c-col md="4">
+                <label class="form-label fw-bold">Estado</label>
+                <select class="form-select" [(ngModel)]="filters.Estado">
+                  <option value="Activa">Activa</option>
+                  <option value="Cancelada">Cancelada</option>
+                </select>
+              </c-col>
+
+              <c-col md="4">
+                <label class="form-label fw-bold">Desde</label>
+                <input 
+                  type="date" 
+                  class="form-control"
+                  [(ngModel)]="filters.FechaDesde"
+                />
+              </c-col>
+              
+              <c-col md="4">
+                <label class="form-label fw-bold">Hasta</label>
+                <input 
+                  type="date" 
+                  class="form-control"
+                  [(ngModel)]="filters.FechaHasta"
+                />
+              </c-col>
+
+              <c-col md="12" class="d-flex align-items-center">
+                <div class="btn-group w-100">                  
+                  <input cButton class="me-1" color="primary" type="button" value="Buscar" (click)="applyFilter()">
+                  <input cButton class="me-1" color="secondary" type="button" value="Limpiar" (click)="clearFilters()">
+                </div>
+              </c-col>
+            </c-row>
+          </div>
+
+          <!-- Tabla de Resultados -->
+          <div class="table-section">
+            <div class="table-responsive rounded-3 border">
+              <table [hover]="true" cTable class="mb-0">
+                <thead class="table-dark">
+                  <tr>
+                    <th scope="col" width="10%">N° Póliza</th>
+                    <th *ngIf="userRol !== 'Cliente'" scope="col" width="20%">Cliente</th>
+                    <th scope="col" width="15%">Tipo</th>
+                    <th scope="col" width="15%">Monto</th>
+                    <th scope="col" width="10%">Inicio</th>
+                    <th scope="col" width="10%">Vence</th>
+                    <th scope="col" width="10%">Estado</th>
+                    <th scope="col" width="10%" class="text-center">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Estado de carga -->
+                  <tr *ngIf="loading">
+                    <td colspan="8" class="text-center py-4">
+                      <div class="d-flex justify-content-center align-items-center">
+                        <c-spinner color="primary" class="me-2"></c-spinner>
+                        <span>Cargando pólizas...</span>
+                      </div>
+                    </td>
+                  </tr>
+                  
+                  <!-- Sin resultados -->
+                  <tr *ngIf="!loading && policies.length === 0">
+                    <td colspan="8" class="text-center py-4 text-muted">
+                      No se encontraron pólizas con los filtros actuales
+                    </td>
+                  </tr>
+                  
+                  <!-- Datos -->
+                  <tr *ngFor="let policy of policies" class="align-middle">
+                    <td class="fw-semibold">{{ policy.numeroPoliza }}</td>
+                    <td *ngIf="userRol !== 'Cliente'">{{ policy.clienteNombre }}</td>
+                    <td>{{ getPolicyTypeName(policy.tipoPolizaId) }}</td>
+                    <td>{{ policy.montoAsegurado | currency:'USD':'symbol':'1.2-2' }}</td>
+                    <td>{{ formatDate(policy.fechaInicio) }}</td>
+                    <td>{{ formatDate(policy.fechaExpiracion) }}</td>
+                    <td>{{ policy.estado }}</td>
+                    <td class="text-center">
+                      <div class="btn-group btn-group-sm" role="group">
+                        <input cButton class="me-1" color="info" type="button" value="Ver detalle" (click)="viewPolicy(policy.polizaId)">
+                        <input *ngIf="userRol !== 'Cliente'" cButton class="me-1" color="warning" type="button" value="Editar" (click)="editPolicy(policy.polizaId)">
+                        <input cButton class="me-1" color="danger" type="button" value="Cancelar" (click)="cancelPolicy(policy.polizaId)" [disabled]="policy.estado === 'Cancelada' || (userRol === 'Cliente' && policy.estado === 'Solicitud Cancelar')">
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </c-card-body>
+      </c-card>
+    </c-col>
+  </c-row>
+</div>

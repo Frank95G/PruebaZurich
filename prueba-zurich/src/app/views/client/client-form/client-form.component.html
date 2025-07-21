@@ -1,0 +1,140 @@
+<c-card>
+    <!-- Toast para mensajes -->
+  <c-toaster position="top-end">
+    <c-toast *ngIf="showToast" [autohide]="true" [color]="toastColor" delay="5000" [visible]="showToast">
+      <c-toast-body>{{ toastMessage }}</c-toast-body>
+    </c-toast>
+  </c-toaster>
+
+  <c-card-header>
+    <h5 class="mb-0">{{ isEditMode ? 'Editar Cliente' : 'Emitir Nuevo Cliente' }}</h5>
+  </c-card-header>
+  <c-card-body>
+
+    <form [formGroup]="clientForm" (ngSubmit)="onSubmit()" cForm>
+      <c-row class="g-3">      
+
+        <!-- Identificación -->
+        <c-col md="6">
+          <label cFormLabel>Identificación</label>          
+                  <input
+            type="text"
+            formControlName="identificacion"
+            [class.is-invalid]="clientForm.get('identificacion')?.invalid && clientForm.get('identificacion')?.touched"
+            class="form-control"
+            cFormControl
+            placeholder="1234567890"
+            (keypress)="onNumberKeyPress($event)"
+            maxlength="10"
+          />
+          <div *ngIf="clientForm.get('identificacion')?.invalid && clientForm.get('identificacion')?.touched" class="invalid-feedback">
+            <div *ngIf="clientForm.get('identificacion')?.hasError('required')">Identificación es requerida</div>
+            <div *ngIf="clientForm.get('identificacion')?.hasError('minlength') || 
+                      clientForm.get('identificacion')?.hasError('maxlength')">
+              Debe tener exactamente 10 dígitos
+            </div>
+            <div *ngIf="clientForm.get('identificacion')?.hasError('pattern')">
+              Solo se permiten números (0-9)
+            </div>
+          </div>
+        </c-col>
+        
+        <!-- Nombre -->
+        <c-col md="6">
+          <label cFormLabel>Nombre</label>
+          <input
+            type="text"
+            formControlName="nombre"
+            [class.is-invalid]="clientForm.get('nombre')?.invalid && clientForm.get('nombre')?.touched"
+            class="form-control"
+            cFormControl
+            placeholder="Francisco González"
+          />
+          <div *ngIf="clientForm.get('nombre')?.invalid && clientForm.get('nombre')?.touched" class="invalid-feedback">
+            <span *ngIf="clientForm.get('nombre')?.hasError('required')">Nombre es requerido</span>
+            <span *ngIf="clientForm.get('nombre')?.hasError('pattern')">Solo se permiten letras y espacios</span>
+          </div>
+        </c-col>
+        
+        <!-- email -->
+        <c-col md="6">
+          <label cFormLabel>Email</label>
+          <input
+            type="email"
+            formControlName="email"
+            [class.is-invalid]="clientForm.get('email')?.invalid && clientForm.get('email')?.touched"
+            class="form-control"
+            cFormControl
+            placeholder="usuario@dominio.com"
+          />
+          <div *ngIf="clientForm.get('email')?.invalid && clientForm.get('email')?.touched" class="invalid-feedback">
+            
+            <div *ngIf="clientForm.get('email')?.hasError('required')">
+              El email es requerido
+            </div>
+            
+            <div *ngIf="clientForm.get('email')?.hasError('email') || 
+                      clientForm.get('email')?.hasError('pattern')">
+              Por favor ingrese un email válido (ejemplo: usuario@dominio.com)
+            </div>
+          </div>
+        </c-col>
+        
+        <!-- telefono -->
+        <c-col md="6">
+          <label cFormLabel>Teléfono</label>
+          <input
+            type="text"
+            formControlName="telefono"
+            [class.is-invalid]="clientForm.get('telefono')?.invalid && clientForm.get('telefono')?.touched"
+            class="form-control"
+            cFormControl
+            placeholder="+522411634168"
+          />
+          <div *ngIf="clientForm.get('telefono')?.invalid && clientForm.get('telefono')?.touched" class="invalid-feedback">
+            <span *ngIf="clientForm.get('telefono')?.hasError('required')">Teléfono es requerido</span>
+            <span *ngIf="clientForm.get('telefono')?.hasError('pattern')">Solo se permiten números, +, espacios o guiones</span>
+          </div>
+        </c-col>
+        
+        <!-- Direccion -->
+        <c-col md="12">
+          <label cFormLabel>Dirección</label>
+          <input
+            type="text"
+            formControlName="direccion"
+            [class.is-invalid]="clientForm.get('direccion')?.invalid && clientForm.get('direccion')?.touched"
+            class="form-control"
+            cFormControl
+          />
+          <div *ngIf="clientForm.get('direccion')?.invalid && clientForm.get('direccion')?.touched" class="invalid-feedback">
+            Direccion es requerida
+          </div>
+        </c-col>
+
+        <!-- Botones -->
+        <c-col md="12" class="text-end mt-4">
+          <button
+            cButton
+            color="primary"
+            type="submit"
+            [disabled]="clientForm.invalid || loading"
+          >
+            <span *ngIf="!loading">{{ isEditMode ? 'Actualizar' : 'Guardar' }}</span>
+            <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          </button>
+          <button
+            cButton
+            color="secondary"
+            type="button"
+            class="ms-2"
+            [disabled]="loading"
+            (click)="onCancel()"
+          >
+            Cancelar
+          </button>
+        </c-col>
+      </c-row>
+    </form>
+  </c-card-body>
+</c-card>

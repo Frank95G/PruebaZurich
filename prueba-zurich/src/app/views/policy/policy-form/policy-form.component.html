@@ -1,0 +1,150 @@
+<c-card>
+    <!-- Toast para mensajes -->
+  <c-toaster position="top-end">
+    <c-toast *ngIf="showToast" [autohide]="true" [color]="toastColor" delay="5000" [visible]="showToast">
+      <c-toast-body>{{ toastMessage }}</c-toast-body>
+    </c-toast>
+  </c-toaster>
+
+  <c-card-header>
+    <h5 class="mb-0">{{ isEditMode ? 'Editar Póliza' : 'Emitir Nueva Póliza' }}</h5>
+  </c-card-header>
+  <c-card-body>
+    
+    <form [formGroup]="policyForm" (ngSubmit)="onSubmit()" cForm>
+      <c-row class="g-3">
+        
+        <!-- Cliente ID -->
+        <c-col md="6">
+          <label>Buscar Cliente</label>
+          <input type="text" 
+                [formControl]="searchControl"
+                class="form-control"
+                placeholder="Escribe al menos 2 caracteres...">
+          
+          <div *ngIf="filteredClients.length > 0" class="autocomplete-dropdown">
+            <div *ngFor="let client of filteredClients" 
+                class="autocomplete-item"
+                (click)="selectClient(client)">
+              {{ client.nombre }}
+            </div>
+          </div>
+          
+          <!-- Campo oculto para el formulario -->
+          <input type="hidden" formControlName="clienteId">
+          <div class="invalid-feedback">
+            <div *ngIf="policyForm.get('clienteId')?.hasError('required')">ID de cliente es requerido</div>
+            <div *ngIf="policyForm.get('clienteId')?.hasError('min') || policyForm.get('clienteId')?.hasError('pattern')">
+              Debe ser un número mayor a 0
+            </div>
+          </div>
+        </c-col>
+
+        <!-- Tipo de Póliza -->
+        <c-col md="6">
+          <label cFormLabel>Tipo de Póliza</label>
+          <select
+            formControlName="tipoPolizaId"
+            [class.is-invalid]="policyForm.get('tipoPolizaId')?.invalid && policyForm.get('tipoPolizaId')?.touched"
+            class="form-select"
+            cFormControl
+          >
+            <option value="">Seleccione un tipo</option>
+            <option *ngFor="let type of policyTypes" [value]="type.tipoPolizaId">
+              {{ type.nombre }}
+            </option>
+          </select>
+          <div *ngIf="policyForm.get('tipoPolizaId')?.invalid && policyForm.get('tipoPolizaId')?.touched" class="invalid-feedback">
+            Tipo de póliza es requerido
+          </div>
+        </c-col>
+
+        <!-- Fecha Inicio -->
+        <c-col md="6">
+          <label cFormLabel>Fecha de Inicio</label>
+          <input
+            type="date"
+            formControlName="fechaInicio"
+            [class.is-invalid]="policyForm.get('fechaInicio')?.invalid && policyForm.get('fechaInicio')?.touched"
+            class="form-control"
+            cFormControl
+            [min]="today | date: 'yyyy-MM-dd'"
+          />
+          <div class="invalid-feedback">
+            <div *ngIf="policyForm.get('fechaInicio')?.hasError('required')">Fecha requerida</div>
+            <div *ngIf="policyForm.get('fechaInicio')?.hasError('pastDate')">
+              La fecha no puede ser en el pasado
+            </div>
+          </div>
+        </c-col>
+
+        <!-- Fecha Expiración -->
+        <c-col md="6">
+          <label cFormLabel>Fecha de Expiración</label>
+          <input
+            type="date"
+            formControlName="fechaExpiracion"
+            [class.is-invalid]="policyForm.get('fechaExpiracion')?.invalid && policyForm.get('fechaExpiracion')?.touched"
+            class="form-control"
+            cFormControl
+            [min]="policyForm.get('fechaInicio')?.value || today | date: 'yyyy-MM-dd'"
+          />
+          <div class="invalid-feedback">
+            <div *ngIf="policyForm.get('fechaExpiracion')?.hasError('required')">Fecha requerida</div>
+          </div>
+          <div *ngIf="policyForm.errors?.['invalidDates']" class="text-danger small mt-1">
+            La fecha de expiración debe ser posterior a la de inicio
+          </div>
+        </c-col>
+
+        <!-- Monto Asegurado -->
+        <c-col md="12">
+          <label cFormLabel>Monto Asegurado</label>
+          <c-input-group class="mb-3">
+            <span cInputGroupText>$</span>
+            <input
+              type="number"
+              formControlName="montoAsegurado"
+              [class.is-invalid]="policyForm.get('montoAsegurado')?.invalid && policyForm.get('montoAsegurado')?.touched"
+              class="form-control"
+              placeholder="0.00"
+              step="0.01"
+              min="0.01"
+              cFormControl
+            />
+          </c-input-group>
+          <div class="invalid-feedback">
+            <div *ngIf="policyForm.get('montoAsegurado')?.hasError('required')">Monto requerido</div>
+            <div *ngIf="policyForm.get('montoAsegurado')?.hasError('min')">Mínimo $0.01</div>
+            <div *ngIf="policyForm.get('montoAsegurado')?.hasError('pattern')">
+              Formato inválido (ej. 1000 o 1250.50)
+            </div>
+          </div>
+        </c-col>
+
+        <!-- Botones -->
+        <c-col md="12" class="text-end mt-4">
+          <button
+            cButton
+            color="primary"
+            type="submit"
+            [disabled]="policyForm.invalid || loading"
+          >
+            <span *ngIf="!loading">{{ isEditMode ? 'Actualizar' : 'Guardar' }}</span>
+            <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          </button>
+          <button
+            cButton
+            color="secondary"
+            type="button"
+            class="ms-2"
+            [disabled]="loading"
+            (click)="onCancel()"
+          >
+            Cancelar
+          </button>
+        </c-col>
+      </c-row>
+    </form>
+  </c-card-body>
+</c-card>

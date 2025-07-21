@@ -1,0 +1,19 @@
+<div class="modal-header">
+  <h4 class="modal-title">Confirmar eliminación del cliente</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="cancel()"></button>
+</div>
+
+<div class="modal-body">
+  <p>¿Está seguro que desea eliminar este cliente permanentemente?</p>
+  <p class="text-danger">Esta acción no se puede deshacer.</p>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="cancel()" [disabled]="loading">
+    Cancelar
+  </button>
+  <button type="button" class="btn btn-danger" (click)="confirm()" [disabled]="loading">
+    <span *ngIf="!loading">Confirmar eliminación</span>
+    <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+  </button>
+</div>

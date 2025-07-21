@@ -1,0 +1,68 @@
+<div class="container mt-4">
+  
+  <!-- Toast para mensajes -->
+  <c-toaster position="top-end">
+    <c-toast *ngIf="showToast" [autohide]="true" [color]="toastColor" delay="5000" [visible]="showToast">
+      <c-toast-body>{{ toastMessage }}</c-toast-body>
+    </c-toast>
+  </c-toaster>
+  <!-- Loading State -->
+  <div *ngIf="loading" class="text-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Cargando...</span>
+    </div>
+    <p class="mt-2">Cargando datos de la póliza...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+    <button class="btn btn-sm btn-outline-danger ms-3" (click)="loadClientData()">Reintentar</button>
+  </div>
+
+  <!-- Client Data -->
+  <div *ngIf="clientData && !loading">
+    <c-card>
+      <c-card-header class="d-flex justify-content-between align-items-center">
+        <h4>Detalles del Cliente</h4>
+        <div>
+          <button cButton color="primary" (click)="goToEdit()">Editar</button>
+          <button cButton color="secondary" class="ms-2" (click)="goBack()">Volver</button>
+        </div>
+      </c-card-header>
+      <c-card-body>
+        <c-row class="mb-3">
+          <c-col md="6">
+            <h5>Información General</h5>
+            <dl class="row">
+              <dt class="col-sm-4">Identificacion:</dt>
+              <dd class="col-sm-8">{{ clientData.identificacion }}</dd>
+
+              <dt class="col-sm-4">Nombre:</dt>
+              <dd class="col-sm-8">{{ clientData.nombre }}</dd>
+
+              <dt class="col-sm-4">Email:</dt>
+              <dd class="col-sm-8">{{ clientData.email }}</dd>
+              
+              <dt class="col-sm-4">Telefono:</dt>
+              <dd class="col-sm-8">{{ clientData.telefono }}</dd>
+              
+              <dt class="col-sm-4">Direccion:</dt>
+              <dd class="col-sm-8">{{ clientData.direccion }}</dd>
+
+            </dl>
+          </c-col>
+        </c-row>
+
+        <!-- Additional Sections -->
+        <c-row>
+          <c-col>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button (click)="deleteClient(clientData.clienteId)" cButton color="outline-danger">Eliminar Cliente</button>
+            </div>
+          </c-col>
+        </c-row>
+      </c-card-body>
+    </c-card>
+  </div>
+</div>

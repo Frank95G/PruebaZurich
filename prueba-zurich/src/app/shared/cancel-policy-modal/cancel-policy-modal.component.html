@@ -1,0 +1,39 @@
+<div class="modal-header">
+  <h4 class="modal-title">Confirmar cancelación de póliza</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
+</div>
+
+<div class="modal-body">
+  <form [formGroup]="cancelForm">
+    <div class="mb-3">
+      <label for="motivo" class="form-label">Motivo de cancelación</label>
+      <textarea
+        id="motivo"
+        class="form-control"
+        formControlName="motivo"
+        rows="3"
+        placeholder="Ingrese el motivo de cancelación (mínimo 10 caracteres)"
+        [class.is-invalid]="motivo?.invalid && (motivo?.dirty || motivo?.touched)"
+      ></textarea>
+      <div *ngIf="motivo?.invalid && (motivo?.dirty || motivo?.touched)" class="invalid-feedback">
+        <div *ngIf="motivo?.errors?.['required']">El motivo es requerido</div>
+        <div *ngIf="motivo?.errors?.['minlength']">Debe tener al menos 10 caracteres</div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss()" [disabled]="loading">
+    Cerrar
+  </button>
+  <button 
+    type="button" 
+    class="btn btn-danger" 
+    (click)="confirm()"
+    [disabled]="cancelForm.invalid || loading"
+  >
+    <span *ngIf="!loading">Confirmar cancelación</span>
+    <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+  </button>
+</div>
