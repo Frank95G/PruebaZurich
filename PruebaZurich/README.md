@@ -65,15 +65,15 @@ PruebaZurich/
 # Buenas Prácticas
 
 ## Implementadas
+ - Clean Architecture: Separación clara de responsabilidades
+ - Repository Pattern: IRepository<T> con implementación genérica
+ - CQRS: Segregación de consultas y comandos
+ - DTOs: Transferencia segura de datos
+ - Validaciones:
+ - DataAnnotations en DTOs
+ - FluentValidation para reglas complejas
+ - JWT: Autenticación stateless
+ - Logging Estructurado: Serilog con enriquecimiento de contexto
+ - Migraciones: Control de versiones de esquema
 
-# Clean Architecture: Separación clara de responsabilidades
-# Repository Pattern: IRepository<T> con implementación genérica
-# CQRS: Segregación de consultas y comandos
-# DTOs: Transferencia segura de datos
-# Validaciones:
-# DataAnnotations en DTOs
-# FluentValidation para reglas complejas
-# JWT: Autenticación stateless
-# Logging Estructurado: Serilog con enriquecimiento de contexto
-# Migraciones: Control de versiones de esquema
 
