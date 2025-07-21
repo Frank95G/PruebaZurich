@@ -1,13 +1,12 @@
 # Etapa de construcción
-FROM node:22 AS builder
+FROM node:20 AS build
 WORKDIR /app
-COPY frontend/package.json frontend/package-lock.json ./
+COPY package.json package-lock.json ./
 RUN npm install
-COPY frontend .
+COPY . .
 RUN npm run build --prod
 
-# Etapa de producción
+# Etapa final
 FROM nginx:alpine
-COPY --from=builder /app/dist/frontend /usr/share/nginx/html
-COPY frontend/nginx-custom.conf /etc/nginx/conf.d/default.conf
-EXPOSE 80
+COPY --from=build /app/dist/prueba-zurich /usr/share/nginx/html 
+COPY nginx.conf /etc/nginx/conf.d/default.conf
