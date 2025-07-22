@@ -1,31 +1,27 @@
-https://img.shields.io/badge/Angular-20-red
-https://img.shields.io/badge/License-MIT-green
+![Angular](https://img.shields.io/badge/Angular-20-red)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-Frontend para sistema de gestión de seguros desarrollado con Angular 20.
+# Frontend para sistema de gestión de seguros desarrollado con Angular 20
 
-📋 Tabla de Contenidos
-Prerrequisitos
+## 📋 Tabla de Contenidos
+- [Prerrequisitos](#-prerrequisitos)
+- [Instalación](#-instalación)
+- [Estructura del Proyecto](#-estructura-del-proyecto)
+- [Desarrollo](#-desarrollo)
+- [Construcción](#-construcción)
+- [Testing](#-testing)
+- [Contribución](#-contribución)
+- [Licencia](#-licencia)
 
-Instalación
+## ⚙️ Prerrequisitos
 
-Estructura del Proyecto
+| Tecnología | Versión | Instalación |
+|------------|---------|-------------|
+| Node.js | ^20.19.0 \|\| ^22.12.0 \|\| ^24.0.0 | [Descargar](https://nodejs.org/) |
+| Angular CLI | 20.x+ | `npm install -g @angular/cli@20.x` |
 
-Desarrollo
+## 🚀 Instalación
 
-Construcción
-
-Testing
-
-Contribución
-
-Licencia
-
-⚙️ Prerrequisitos
-Tecnología	Versión	Instalación
-Node.js	^20.19.0 || ^22.12.0 || ^24.0.0	Descargar
-Angular CLI	20.x+	npm install -g @angular/cli@20.x
-🚀 Instalación
-bash
 # Clonar repositorio
 git clone https://github.com/Frank95G/PruebaZurich.git
 cd PruebaZurich/ZurichUI
@@ -35,8 +31,8 @@ npm install
 
 # Actualizar paquetes
 npm update
-🏗 Estructura del Proyecto
-text
+
+## 🏗 Estructura del Proyecto
 zurich-frontend/
 ├── src/                         
 │   ├── app/                     
@@ -54,8 +50,8 @@ zurich-frontend/
 │   └── styles/                  # Estilos globales
 ├── angular.json                 # Configuración Angular CLI
 └── package.json                 # Dependencias
-💻 Desarrollo
-bash
+
+##💻 Desarrollo
 # Iniciar servidor de desarrollo
 ng serve
 
@@ -63,8 +59,7 @@ ng serve
 http://localhost:4200
 El servidor recargará automáticamente al modificar archivos.
 
-🔨 Construcción
-bash
+##🔨 Construcción
 # Build de desarrollo
 ng build
 
@@ -72,14 +67,13 @@ ng build
 ng build --configuration production
 Los artefactos se generan en dist/.
 
-🧪 Testing
-bash
+##🧪 Testing
 # Ejecutar pruebas unitarias
 ng test
 
 # Ejecutar pruebas e2e (requiere servidor corriendo)
 ng e2e
-🤝 Contribución
+##🤝 Contribución
 Crear issue describiendo los cambios propuestos
 
 Hacer fork del proyecto
@@ -92,5 +86,5 @@ Hacer push al branch (git push origin feature/nueva-funcionalidad)
 
 Abrir Pull Request
 
-📜 Licencia
+##📜 Licencia
 Distribuido bajo licencia MIT. Ver LICENSE para más información.
