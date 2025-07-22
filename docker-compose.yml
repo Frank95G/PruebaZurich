@@ -1,34 +1,39 @@
-version: '3.8'
-
 services:
-  backend:
+  pruebazurich:
+    image: ${DOCKER_REGISTRY-}pruebazurich
+    container_name: Zurich.Back
     build:
-      context: ./PruebaZurich
-    ports:
-      - "5000:5000" 
-    expose:
-      - "5000"   
+      context: .
+      dockerfile: PruebaZurich/Dockerfile
+    networks:
+      - zurich-network
     depends_on:
       - db
-
-  frontend:
-    build:
-      context: ./prueba-zurich
-    ports:
-      - "4200:80"
-    depends_on:
-      - backend
-
   db:
     image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: Zurich.Db
+    volumes: 
+      - ./.containers/database:/var/opt/mssql/data
+    ports:
+      - "1433:1433"
     environment:
       - ACCEPT_EULA=Y
       - SA_PASSWORD=Admin123*
       - MSSQL_PID=Express
+    networks:
+      - zurich-network
+  frontend:
+    build:
+      context: ./prueba-zurich
+      dockerfile: Dockerfile
+    container_name: Zurich.Front
     ports:
-      - "1433:1433"
-    volumes:
-      - sql_data:/var/opt/mssql
-
-volumes:
-  sql_data:
+      - "4200:80"
+    networks:
+      - zurich-network
+    depends_on:
+      - pruebazurich
+      
+networks:
+  zurich-network:
+    driver: bridge

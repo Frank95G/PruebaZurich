@@ -1,26 +1,30 @@
-# Etapa de construcción
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /src
+# Consulte https://aka.ms/customizecontainer para aprender a personalizar su contenedor de depuración y cómo Visual Studio usa este Dockerfile para compilar sus imágenes para una depuración más rápida.
 
-# Instala las herramientas EF Core
-RUN dotnet tool install --global dotnet-ef
-
-# 1. Copia solo el archivo del proyecto y restaura dependencias
-COPY ["PruebaZurich.csproj", "."]
-RUN dotnet restore "PruebaZurich.csproj"
-
-
-# 2. Copia el resto y construye
-COPY . .
-RUN dotnet publish "PruebaZurich.csproj" -c Release -o /app/publish
-
-# Etapa final
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
+# Esta fase se usa cuando se ejecuta desde VS en modo rápido (valor predeterminado para la configuración de depuración)
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+USER $APP_UID
 WORKDIR /app
-EXPOSE 5000
+EXPOSE 8080
+EXPOSE 8081
 
-# Copia solo lo necesario desde la etapa de construcción
-COPY --from=build /app/publish .
-COPY --from=build /root/.dotnet/tools /root/.dotnet/tools
-ENV PATH="$PATH:/root/.dotnet/tools"
+
+# Esta fase se usa para compilar el proyecto de servicio
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+ARG BUILD_CONFIGURATION=Release
+WORKDIR /src
+COPY ["PruebaZurich/PruebaZurich.csproj", "PruebaZurich/"]
+RUN dotnet restore "./PruebaZurich/PruebaZurich.csproj"
+COPY . .
+WORKDIR "/src/PruebaZurich"
+RUN dotnet build "./PruebaZurich.csproj" -c $BUILD_CONFIGURATION -o /app/build
+
+# Esta fase se usa para publicar el proyecto de servicio que se copiará en la fase final.
+FROM build AS publish
+ARG BUILD_CONFIGURATION=Release
+RUN dotnet publish "./PruebaZurich.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+
+# Esta fase se usa en producción o cuando se ejecuta desde VS en modo normal (valor predeterminado cuando no se usa la configuración de depuración)
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "PruebaZurich.dll"]

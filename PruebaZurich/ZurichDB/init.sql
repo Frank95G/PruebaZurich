@@ -19,7 +19,7 @@ GO
 CREATE SCHEMA seg;
 GO
 
--- Tabla de Tipos de Póliza (catálogo)
+-- Tabla de Tipos de Pï¿½liza (catï¿½logo)
 CREATE TABLE seg.TiposPoliza
 (
     TipoPolizaId INT IDENTITY(1,1) NOT NULL,
@@ -50,7 +50,7 @@ GO
 CREATE TABLE seg.Clientes
 (
     ClienteId INT IDENTITY(1,1) NOT NULL,
-    UsuarioId INT NULL, -- Relación con usuario si tiene acceso al sistema
+    UsuarioId INT NULL, -- Relaciï¿½n con usuario si tiene acceso al sistema
     Identificacion CHAR(10) NOT NULL UNIQUE CHECK (LEN(Identificacion) = 10 AND Identificacion NOT LIKE '%[^0-9]%'),
     Nombre NVARCHAR(100) NOT NULL CHECK (Nombre NOT LIKE '%[0-9]%' AND Nombre NOT LIKE '%[!@#$%^&*()]%'),
     Email NVARCHAR(100) NOT NULL UNIQUE CHECK (Email LIKE '%_@__%.__%'),
@@ -64,7 +64,7 @@ CREATE TABLE seg.Clientes
 );
 GO
 
--- Tabla de Pólizas
+-- Tabla de Pï¿½lizas
 CREATE TABLE seg.Polizas
 (
     PolizaId INT IDENTITY(1,1) NOT NULL,
@@ -87,7 +87,7 @@ CREATE TABLE seg.Polizas
 );
 GO
 
--- 3. Se crean índices para mejorar el rendimiento
+-- 3. Se crean ï¿½ndices para mejorar el rendimiento
 CREATE INDEX IX_Clientes_Email ON seg.Clientes(Email);
 CREATE INDEX IX_Clientes_Nombre ON seg.Clientes(Nombre);
 CREATE INDEX IX_Polizas_ClienteId ON seg.Polizas(ClienteId);
@@ -99,7 +99,7 @@ GO
 INSERT INTO seg.TiposPoliza (Nombre, Descripcion)
 VALUES 
     ('Vida', 'Seguro de vida individual'),
-    ('Automóvil', 'Seguro para vehículos automotores'),
-    ('Salud', 'Seguro médico y de salud'),
+    ('AutomÃ³vil', 'Seguro para vehÃ­culos automotores'),
+    ('Salud', 'Seguro mï¿½dico y de salud'),
     ('Hogar', 'Seguro para vivienda y contenido');
 GO
