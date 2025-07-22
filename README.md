@@ -61,21 +61,33 @@ Modificar en appsettings.json:
 dotnet ef database update
 
 # 🏗 Estructura del Proyecto
-  PruebaZurich/
-  ├── Controllers/
-  │   ├── AuthController.cs
-  │   ├── ClientesController.cs
-  │   └── PolizasController.cs
-  ├── Data/
-  │   ├── Context/
-  │   ├── Entities/
-  │   ├── Repositories/
-  │   └── Migrations/
-  ├── Models/
-  │   └── DTOs/
-  ├── Services/
-  ├── Exceptions/
-  └── Mapping/
+PruebaZurich/
+├── bin/                          # Archivos binarios compilados
+├── Controllers/                  # Controladores API
+│   ├── AuthController.cs         # Autenticación y autorización
+│   ├── ClientesController.cs     # Gestión de clientes
+│   └── PolizasController.cs      # Gestión de pólizas
+├── Data/                         # Capa de acceso a datos
+│   ├── Context/
+│   │   └── ZurichDBContext.cs    # Contexto de Entity Framework
+│   ├── Entities/                 # Entidades de la base de datos
+│   ├── Initializers/             # Inicializadores de datos
+│   ├── Repositories/             # Patrón Repositorio
+│   │   ├── Implementations/      # Implementaciones concretas
+│   │   └── Interfaces/           # Interfaces de repositorios
+│   └── Migrations/               # Migraciones de Entity Framework
+├── Models/                       # Modelos de la aplicación
+│   └── DTOs/                     # Objetos de Transferencia de Datos
+├── Mapping/                      # Configuraciones de mapeo (AutoMapper)
+├── Services/                     # Lógica de negocio
+│   ├── Implementations/          # Implementaciones de servicios
+│   └── Interfaces/               # Interfaces de servicios
+├── Exceptions/                   # Excepciones personalizadas
+├── Properties/
+│   └── launchSettings.json       # Configuración de lanzamiento
+├── ZurichDB/                     # Scripts de base de datos
+│   └── init.sql                  # Script de inicialización de BD
+└── obj/                          # Objetos temporales de compilación
   
 # ✅ Buenas Prácticas
 Clean Architecture: Separación de capas
