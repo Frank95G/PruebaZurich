@@ -1,7 +1,8 @@
-﻿PruebaZurich - Backend de Gestión de Seguros
-https://img.shields.io/badge/.NET-8.0-blue
+﻿https://img.shields.io/badge/.NET-8.0-blue
 https://img.shields.io/badge/SQL_Server-2021-lightgrey
 https://img.shields.io/badge/License-MIT-green
+
+PruebaZurich - Backend de Gestión de Seguros
 
 Backend para sistema de gestión de seguros desarrollado con .NET 8 y SQL Server.
 
