@@ -16,7 +16,6 @@ export class RoleGuard implements CanActivate {
     
     return this.store.select(AuthState.usuario).pipe(
       map(usuario => {
-        debugger;
         if (!usuario) {
           this.router.navigate(['/login']);
           return false;

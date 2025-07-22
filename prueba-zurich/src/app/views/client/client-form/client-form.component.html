@@ -15,7 +15,7 @@
       <c-row class="g-3">      
 
         <!-- Identificación -->
-        <c-col md="6">
+        <c-col *ngIf="userRol == 'Administrador'" md="6">
           <label cFormLabel>Identificación</label>          
                   <input
             type="text"
@@ -40,7 +40,7 @@
         </c-col>
         
         <!-- Nombre -->
-        <c-col md="6">
+        <c-col *ngIf="userRol == 'Administrador'" md="6">
           <label cFormLabel>Nombre</label>
           <input
             type="text"
@@ -57,7 +57,7 @@
         </c-col>
         
         <!-- email -->
-        <c-col md="6">
+        <c-col  *ngIf="userRol == 'Administrador'"  md="6">
           <label cFormLabel>Email</label>
           <input
             type="email"

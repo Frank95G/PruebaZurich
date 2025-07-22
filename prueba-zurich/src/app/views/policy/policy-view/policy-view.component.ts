@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { PolicyService } from '../../../services/policy.service';
 import { Policy, POLICY_TYPES } from '../../../models/policy.model';
 import { firstValueFrom } from 'rxjs';
+import { Store } from '@ngxs/store';
 
 // CoreUI Components
 import {
@@ -14,6 +15,7 @@ import {
   RowComponent,
   ColComponent
 } from '@coreui/angular';
+import { AuthState } from '../../../store/auth.state';
 
 @Component({
   selector: 'app-policy-view',
@@ -29,15 +31,22 @@ export class PolicyViewComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private policyService = inject(PolicyService);
+  private store = inject(Store);
+  protected usuario = this.store.select(AuthState.usuario);
 
   policyId!: number;
   policyData!: Policy;
   loading = false;
   errorMessage: string | null = null;  
   policyTypes = POLICY_TYPES;
+  userRol: string = '';
 
   async ngOnInit(): Promise<void> {
     this.policyId = Number(this.route.snapshot.paramMap.get('id'));
+    
+    this.usuario.subscribe(usuario => {
+      this.userRol = usuario?.rol || '';
+    });
     
     if (isNaN(this.policyId)) {
       this.errorMessage = 'ID de póliza inválido';

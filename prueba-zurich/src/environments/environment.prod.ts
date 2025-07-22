@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://localhost:55069/api'
+  apiUrl: 'http://tu-backend-dns.region.azurecontainer.io'
 };

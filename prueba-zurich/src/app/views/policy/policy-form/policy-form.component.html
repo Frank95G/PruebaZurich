@@ -128,7 +128,6 @@
             cButton
             color="primary"
             type="submit"
-            [disabled]="policyForm.invalid || loading"
           >
             <span *ngIf="!loading">{{ isEditMode ? 'Actualizar' : 'Guardar' }}</span>
             <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>

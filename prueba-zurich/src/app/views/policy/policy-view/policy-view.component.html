@@ -19,7 +19,7 @@
       <c-card-header class="d-flex justify-content-between align-items-center">
         <h4>Detalles de la Póliza</h4>
         <div>
-          <button cButton color="primary" (click)="goToEdit()">Editar</button>
+          <button *ngIf="userRol == 'Administrador'" cButton color="primary" (click)="goToEdit()">Editar</button>
           <button cButton color="secondary" class="ms-2" (click)="goBack()">Volver</button>
         </div>
       </c-card-header>

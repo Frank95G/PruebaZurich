@@ -14,32 +14,32 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Configuraci�n centralizada
+// Configuración centralizada
 var configuration = builder.Configuration;
 
 
 builder.Services.AddControllers();
 
-// Configuraci�n de DbContext
+// Configuración de DbContext
 builder.Services.AddDbContext<ZurichDBContext>(options =>
     options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-// Configuraci�n de AutoMapper (versi�n optimizada)
+// Configuración de AutoMapper (versión optimizada)
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
-// Configuraci�n de Repositorios
+// Configuración de Repositorios
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IPolizaRepository, PolizaRepository>();
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
-// Configuraci�n de Servicios
+// Configuración de Servicios
 builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped<IPolizaService, PolizaService>();
 builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 
-// Configuraci�n de JWT con validaci�n
+// Configuración de JWT con validación
 var jwtSettings = configuration.GetSection("JwtSettings");
 var secretKey = jwtSettings["SecretKey"] ??
     throw new InvalidOperationException("JWT Secret no configurado en appsettings");
@@ -61,7 +61,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-// Configuraci�n de CORS (movido antes de builder.Build())
+// Configuración de CORS (movido antes de builder.Build())
 var corsConfig = configuration.GetSection("CorsPolicy");
 builder.Services.AddCors(options =>
 {
@@ -93,7 +93,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-// Configuraci�n de Swagger
+// Configuración de Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -127,7 +127,7 @@ builder.Services.AddSwaggerGen(c =>
 
 var app = builder.Build();
 
-// Configuraci�n del Pipeline HTTP
+// Configuración del Pipeline HTTP
 app.UseHttpsRedirection();
 
 if (app.Environment.IsDevelopment())
@@ -142,12 +142,12 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-// Inicializaci�n de la Base de Datos
+// Inicialización de la Base de Datos
 await InitializeDatabase(app);
 
 app.Run();
 
-// M�todos auxiliares
+// Métodos auxiliares
 async Task InitializeDatabase(WebApplication webApp)
 {
     using var scope = webApp.Services.CreateScope();
@@ -181,7 +181,7 @@ async Task InitializeDatabase(WebApplication webApp)
     }
     catch (Exception ex)
     {
-        webApp.Logger.LogError(ex, "Error durante la inicializaci�n de la base de datos");
+        webApp.Logger.LogError(ex, "Error durante la inicialización de la base de datos");
     }
 }
 

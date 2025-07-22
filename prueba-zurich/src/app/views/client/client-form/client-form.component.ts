@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, AbstractControl, FormControl } from '@angular/forms';
+import { FormGroup, Validators, ReactiveFormsModule, AbstractControl, FormControl } from '@angular/forms';
 import { ClienteService } from '../../../services/client.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule, Location } from '@angular/common';
@@ -19,6 +19,8 @@ import {
   ToasterComponent,  
 } from '@coreui/angular';
 import { Client } from '../../../models/client.model';
+import { Store } from '@ngxs/store';
+import { AuthState } from '../../../store/auth.state';
 
 @Component({
   selector: 'app-client-form',
@@ -36,11 +38,12 @@ import { Client } from '../../../models/client.model';
   templateUrl: './client-form.component.html'
 })
 export class ClientFormComponent implements OnInit {
-  private fb = inject(FormBuilder);
   private clientService = inject(ClienteService);
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private location = inject(Location); 
+  private store = inject(Store);
+  protected usuario = this.store.select(AuthState.usuario);
 
   @Input() clientId?: number;
   @Output() saved = new EventEmitter<boolean>();
@@ -52,6 +55,8 @@ export class ClientFormComponent implements OnInit {
   showToast = false;
   toastMessage = '';
   toastColor = '';
+  userRol: string = '';
+  userClienteIId: number | null = null;
 
   constructor() {
     this.clientForm = new FormGroup({
@@ -79,21 +84,37 @@ export class ClientFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.clientId = Number(this.route.snapshot.paramMap.get('id'));
-
-    if (this.clientId) {
-      this.isEditMode = true;
-      this.loadClientData();
-    }
-    // Validación para nombre al pegar
-    this.clientForm.get('nombre')?.valueChanges.subscribe(value => {
-      if (value) {
-        const filteredValue = value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]/g, '');
-        if (value !== filteredValue) {
-          this.clientForm.get('nombre')?.setValue(filteredValue, { emitEvent: false });
-        }
-      }
+        
+    this.usuario.subscribe(usuario => {
+      this.userRol = usuario?.rol || '';
+      this.userClienteIId = usuario?.clienteId || null;
     });
+
+    if(this.userRol == 'Administrador'){
+      this.clientId = Number(this.route.snapshot.paramMap.get('id'));
+        if (this.clientId) {
+          this.isEditMode = true;
+          this.loadClientData();
+        }
+        // Validación para nombre al pegar
+        this.clientForm.get('nombre')?.valueChanges.subscribe(value => {
+          if (value) {
+            const filteredValue = value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]/g, '');
+            if (value !== filteredValue) {
+              this.clientForm.get('nombre')?.setValue(filteredValue, { emitEvent: false });
+            }
+          }
+        });
+    }
+    //Rol Cliente
+    else{
+        this.clientId = this.userClienteIId !== null ? this.userClienteIId : undefined;      
+        if (this.clientId) {
+          this.isEditMode = true;
+          this.loadClientData();          
+        }
+    }
+    
 
     // Validación para teléfono al pegar
     this.clientForm.get('telefono')?.valueChanges.subscribe(value => {

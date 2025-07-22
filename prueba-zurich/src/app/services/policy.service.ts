@@ -94,7 +94,6 @@ export class PolicyService {
   reqCancelPolicy(policyId: number): Observable<void> {
     return this.getHeaders().pipe(
       switchMap(headers => {
-        debugger;
         return this.http.post<void>(`${this.apiUrl}/${policyId}/solcancelar`, null, { headers });
       })
     );

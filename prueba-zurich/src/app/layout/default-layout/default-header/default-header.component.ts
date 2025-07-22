@@ -1,6 +1,7 @@
 import { AsyncPipe, NgTemplateOutlet, CommonModule  } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router'; // Añade este import
 
 import {
   AvatarComponent,
@@ -45,8 +46,8 @@ export class DefaultHeaderComponent extends HeaderComponent {
   });
   
   private store = inject(Store);
+  private router= inject(Router); 
   protected usuario = this.store.select(AuthState.usuario);
-  router: any;
   
   constructor() {
     super();
@@ -54,7 +55,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
 
   sidebarId = input('sidebar1');
 
-    logout() {
+  logout() {
     this.store.dispatch(new Logout()).subscribe({
       complete: () => {
         // Redirige después de limpiar todo
@@ -69,5 +70,8 @@ export class DefaultHeaderComponent extends HeaderComponent {
       }
     });
   }
-
+  
+  profile() {
+    this.router.navigate(['/client/form']);
+  }
 }

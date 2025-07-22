@@ -66,25 +66,28 @@ export const routes: Routes = [
   },
   {
     path: 'client',
-    canActivate: [AuthGuard, RoleGuard],
     loadComponent: () => import('./layout').then(m => m.DefaultLayoutComponent),
     data: {
       title: 'Client List'
     },
     children: [
       {
+      canActivate: [AuthGuard, RoleGuard],
         path: 'list',
         loadComponent: () => import('./views/client/client-list/client-list.component').then(m => m.ClientListComponent),
       },
       {
+      canActivate: [AuthGuard],
         path: 'form',
         loadComponent: () => import('./views/client/client-form/client-form.component').then(m => m.ClientFormComponent),
       },
       {
+        canActivate: [AuthGuard, RoleGuard],
         path: 'form/:id',
         loadComponent: () => import('./views/client/client-form/client-form.component').then(m => m.ClientFormComponent),
       },
       {
+        canActivate: [AuthGuard, RoleGuard],
         path: 'view/:id',
         loadComponent: () => import('./views/client/client-view/client-view.component').then(m => m.ClientViewComponent),
       }

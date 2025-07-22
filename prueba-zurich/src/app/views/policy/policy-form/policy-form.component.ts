@@ -124,6 +124,10 @@ export class PolicyFormComponent implements OnInit {
           fechaExpiracion: policy.fechaExpiracion.split('T')[0],
           montoAsegurado: policy.montoAsegurado
         });
+        const clienteIdControl = this.policyForm.get('clienteId');
+        if (clienteIdControl) {
+          clienteIdControl.setValue(policy.clienteId);
+        }
       },
       error: (err) => {
         console.error('Error loading policy:', err);
@@ -157,8 +161,6 @@ export class PolicyFormComponent implements OnInit {
   };
 
   onSubmit(): void {
-    if (this.policyForm.invalid) return;
-
     this.loading = true;
     const formData = this.policyForm.value;
     formData.fechaInicio = new Date(formData.fechaInicio).toISOString();
@@ -192,7 +194,6 @@ export class PolicyFormComponent implements OnInit {
   }
   onCancel(): void {
   if (this.policyForm.dirty) {
-      // Opcional: Mostrar confirmación si hay cambios no guardados
       if (confirm('¿Estás seguro de cancelar? Los cambios no guardados se perderán.')) {
         this.location.back();
       }

@@ -94,7 +94,6 @@ export class AuthState {
         const parsedAuth = JSON.parse(storedAuth);
         ctx.patchState(parsedAuth);
       } catch (e) {
-        console.error('Error al parsear auth de localStorage', e);
         localStorage.removeItem('auth');
       }
     }
