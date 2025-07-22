@@ -3,16 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\franc\\source\\repos\\PruebaZurich\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B4ACAB41-EB32-46B3-AB81-7B12638916EA}|PruebaZurich\\PruebaZurich.csproj|c:\\users\\franc\\source\\repos\\pruebazurich\\pruebazurich\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4ACAB41-EB32-46B3-AB81-7B12638916EA}|PruebaZurich\\PruebaZurich.csproj|solutionrelative:pruebazurich\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B4ACAB41-EB32-46B3-AB81-7B12638916EA}|PruebaZurich\\PruebaZurich.csproj|c:\\users\\franc\\source\\repos\\pruebazurich\\pruebazurich\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{B4ACAB41-EB32-46B3-AB81-7B12638916EA}|PruebaZurich\\PruebaZurich.csproj|solutionrelative:pruebazurich\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B4ACAB41-EB32-46B3-AB81-7B12638916EA}|PruebaZurich\\PruebaZurich.csproj|c:\\users\\franc\\source\\repos\\pruebazurich\\pruebazurich\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{B4ACAB41-EB32-46B3-AB81-7B12638916EA}|PruebaZurich\\PruebaZurich.csproj|solutionrelative:pruebazurich\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B4ACAB41-EB32-46B3-AB81-7B12638916EA}|PruebaZurich\\PruebaZurich.csproj|c:\\users\\franc\\source\\repos\\pruebazurich\\pruebazurich\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{B4ACAB41-EB32-46B3-AB81-7B12638916EA}|PruebaZurich\\PruebaZurich.csproj|solutionrelative:pruebazurich\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{B4ACAB41-EB32-46B3-AB81-7B12638916EA}|PruebaZurich\\PruebaZurich.csproj|c:\\users\\franc\\source\\repos\\pruebazurich\\pruebazurich\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4ACAB41-EB32-46B3-AB81-7B12638916EA}|PruebaZurich\\PruebaZurich.csproj|solutionrelative:pruebazurich\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B4ACAB41-EB32-46B3-AB81-7B12638916EA}|PruebaZurich\\PruebaZurich.csproj|c:\\users\\franc\\source\\repos\\pruebazurich\\pruebazurich\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
@@ -57,12 +57,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 1,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 7,
@@ -77,13 +73,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\franc\\source\\repos\\PruebaZurich\\PruebaZurich\\appsettings.json",
               "RelativeDocumentMoniker": "PruebaZurich\\appsettings.json",
               "ToolTip": "C:\\Users\\franc\\source\\repos\\PruebaZurich\\PruebaZurich\\appsettings.json",
               "RelativeToolTip": "PruebaZurich\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAWAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-07-21T21:06:14.109Z",
               "EditorCaption": ""
@@ -98,8 +94,7 @@
               "RelativeToolTip": "PruebaZurich\\Program.cs",
               "ViewState": "AgIAAGMAAAAAAAAAAAAcwIAAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-21T20:54:28.982Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-21T20:54:28.982Z"
             },
             {
               "$type": "Document",
@@ -121,14 +116,14 @@
               "RelativeDocumentMoniker": "PruebaZurich\\appsettings.Development.json",
               "ToolTip": "C:\\Users\\franc\\source\\repos\\PruebaZurich\\PruebaZurich\\appsettings.Development.json",
               "RelativeToolTip": "PruebaZurich\\appsettings.Development.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-07-21T21:06:17.979Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\franc\\source\\repos\\PruebaZurich\\PruebaZurich\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "PruebaZurich\\Controllers\\AuthController.cs",
@@ -140,10 +135,6 @@
               "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "Dockerfile",
@@ -153,8 +144,7 @@
               "RelativeToolTip": "PruebaZurich\\Dockerfile",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-07-21T20:29:45.41Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-21T20:29:45.41Z"
             },
             {
               "$type": "Document",

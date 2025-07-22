@@ -1,79 +1,119 @@
-﻿# PruebaZurich - Sistema de Gestión de Seguros
+﻿PruebaZurich - Backend de Gestión de Seguros
+https://img.shields.io/badge/.NET-8.0-blue
+https://img.shields.io/badge/SQL_Server-2021-lightgrey
+https://img.shields.io/badge/License-MIT-green
 
-![.NET Core](https://img.shields.io/badge/.NET-8.0)
-![Angular](https://img.shields.io/badge/Angular-20)
-![SQL Server](https://img.shields.io/badge/SQL_Server-2021)
+Backend para sistema de gestión de seguros desarrollado con .NET 8 y SQL Server.
 
-Sistema integral para la gestión de clientes, pólizas de seguros y usuarios, desarrollado con .NET 8 y Angular 20.
+📋 Tabla de Contenidos
+Requisitos
 
-## 📋 Tabla de Contenidos
-- [Requisitos](#-requisitos)
-- [Instalación](#-instalación)
-- [Configuración](#-configuración)
-- [Estructura del Proyecto](#-estructura-del-proyecto)
-- [Buenas Prácticas](#-buenas-prácticas)
-- [Uso](#-uso)
-- [API Endpoints](#-api-endpoints)
-- [Contribución](#-contribución)
-- [Licencia](#-licencia)
+Instalación
 
-## ⚙️ Requisitos
+Configuración de Base de Datos
 
-### 📦 Dependencias Principales
-| Tecnología       | Versión  |
-|------------------|----------|
-| .NET SDK         | 8.0+     |
-| Node.js          | 22.x+    |
-| SQL Server       | 2021+    |
-| Angular CLI      | 20.x+    |
+Estructura del Proyecto
 
-### 🛠 Herramientas Recomendadas
-- Visual Studio 2022 o VS Code
-- SQL Server Management Studio
-- Postman (para pruebas API)
+Buenas Prácticas
 
-## 🚀 Instalación
+API Endpoints
 
-### Backend (.NET 8)
-```bash
+Contribución
+
+Licencia
+
+⚙️ Requisitos
+📦 Dependencias Principales
+Tecnología	Versión	Instalación
+.NET SDK	8.0+	Descargar
+SQL Server	2021+	Descargar
+🛠 Herramientas Recomendadas
+Visual Studio 2022
+
+SQL Server Management Studio
+
+Postman (para pruebas API)
+
+🚀 Instalación
+bash
 # Clonar repositorio
-git clone https://github.com/Frank95G/PruebaZurich
-
-# Navegar al directorio del proyecto
+git clone https://github.com/Frank95G/PruebaZurich.git
 cd PruebaZurich
 
 # Restaurar paquetes NuGet
 dotnet restore
 
-# Estrcutura del Proyecto
+# Compilar solución
+dotnet build
+🗃 Configuración de Base de Datos
+1. Ejecutar Script de Inicialización
+Ejecute el siguiente comando o el archivo ZurichDB/init.sql en SSMS:
+
+bash
+sqlcmd -S [servidor] -U [usuario] -P [contraseña] -d ZurichDB -i ZurichDB/init.sql
+2. Configurar Connection String
+Modificar en appsettings.json:
+
+json
+"ConnectionStrings": {
+  "DefaultConnection": "Server=[servidor];Database=ZurichDB;User Id=[usuario];Password=[contraseña];TrustServerCertificate=true;"
+}
+3. Aplicar Migraciones
+bash
+dotnet ef database update
+🏗 Estructura del Proyecto
+text
 PruebaZurich/
-├── Controllers/          # Endpoints API
-│   ├── AuthController.cs # Autenticación JWT
+├── Controllers/
+│   ├── AuthController.cs
 │   ├── ClientesController.cs
 │   └── PolizasController.cs
 ├── Data/
-│   ├── Context/          # Configuración EF Core
-│   ├── Entities/         # Modelos de BD
-│   ├── Repositories/     # Implementación Repository
-│   └── Initializers/     # Datos iniciales
+│   ├── Context/
+│   ├── Entities/
+│   ├── Repositories/
+│   └── Migrations/
 ├── Models/
-│   └── DTOs/             # Objetos de transferencia
-├── Services/             # Lógica de negocio
-├── Exceptions/           # Excepciones personalizadas
-└── Mapping/              # Perfiles AutoMapper
+│   └── DTOs/
+├── Services/
+├── Exceptions/
+└── Mapping/
+✅ Buenas Prácticas
+Clean Architecture: Separación de capas
 
-# Buenas Prácticas
+Repository Pattern: IRepository<T> genérico
 
-## Implementadas
- - Clean Architecture: Separación clara de responsabilidades
- - Repository Pattern: IRepository<T> con implementación genérica
- - CQRS: Segregación de consultas y comandos
- - DTOs: Transferencia segura de datos
- - Validaciones:
- - DataAnnotations en DTOs
- - FluentValidation para reglas complejas
- - JWT: Autenticación stateless
- - Logging Estructurado: Serilog con enriquecimiento de contexto
- - Migraciones: Control de versiones de esquema
+CQRS: Segregación de consultas/comandos
 
+DTOs: Mapeo seguro con AutoMapper
 
+Validaciones: FluentValidation + DataAnnotations
+
+JWT Authentication: Seguridad implementada
+
+Logging: Serilog con contexto
+
+Migrations: Control de esquema EF Core
+
+📡 API Endpoints
+Método	Endpoint	Descripción
+POST	/api/auth/login	Autenticación JWT
+GET	/api/clientes	Listar clientes
+POST	/api/clientes	Crear cliente
+GET	/api/polizas	Listar pólizas
+POST	/api/polizas	Crear póliza
+🤝 Contribución
+Crear issue describiendo los cambios
+
+Hacer fork del proyecto
+
+Crear feature branch (git checkout -b feature/nueva-funcionalidad)
+
+Hacer commit de los cambios (git commit -am 'Agrega nueva funcionalidad')
+
+Hacer push al branch (git push origin feature/nueva-funcionalidad)
+
+Abrir Pull Request
+
+📜 Licencia
+Distribuido bajo licencia MIT. Ver LICENSE para más información.

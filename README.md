@@ -1,217 +1,216 @@
+PruebaZurich - Backend de Gestión de Seguros
+https://img.shields.io/badge/.NET-8.0-blue
+https://img.shields.io/badge/SQL_Server-2021-lightgrey
+https://img.shields.io/badge/License-MIT-green
 
-#-----------------Back End -------------------
+Backend para sistema de gestión de seguros desarrollado con .NET 8 y SQL Server.
 
-# PruebaZurich - Sistema de Gestión de Seguros
+📋 Tabla de Contenidos
+Requisitos
 
-![.NET Core](https://img.shields.io/badge/.NET-8.0)
-![Angular](https://img.shields.io/badge/Angular-20)
-![SQL Server](https://img.shields.io/badge/SQL_Server-2021)
+Instalación
 
-Sistema integral para la gestión de clientes, pólizas de seguros y usuarios, desarrollado con .NET 8 y Angular 20.
+Configuración de Base de Datos
 
-## 📋 Tabla de Contenidos
-- [Requisitos](#-requisitos)
-- [Instalación](#-instalación)
-- [Configuración](#-configuración)
-- [Estructura del Proyecto](#-estructura-del-proyecto)
-- [Buenas Prácticas](#-buenas-prácticas)
-- [Uso](#-uso)
-- [API Endpoints](#-api-endpoints)
-- [Contribución](#-contribución)
-- [Licencia](#-licencia)
+Estructura del Proyecto
 
-## ⚙️ Requisitos
+Buenas Prácticas
 
-### 📦 Dependencias Principales
-| Tecnología       | Versión  |
-|------------------|----------|
-| .NET SDK         | 8.0+     |
-| Node.js          | 22.x+    |
-| SQL Server       | 2021+    |
-| Angular CLI      | 20.x+    |
+API Endpoints
 
-### 🛠 Herramientas Recomendadas
-- Visual Studio 2022 o VS Code
-- SQL Server Management Studio
-- Postman (para pruebas API)
+Contribución
 
-## 🚀 Instalación
+Licencia
 
-### Backend (.NET 8)
-```bash
+⚙️ Requisitos
+📦 Dependencias Principales
+Tecnología	Versión	Instalación
+.NET SDK	8.0+	Descargar
+SQL Server	2021+	Descargar
+🛠 Herramientas Recomendadas
+Visual Studio 2022
+
+SQL Server Management Studio
+
+Postman (para pruebas API)
+
+🚀 Instalación
+bash
 # Clonar repositorio
-git clone https://github.com/Frank95G/PruebaZurich
-
-# Navegar al directorio del proyecto
+git clone https://github.com/Frank95G/PruebaZurich.git
 cd PruebaZurich
 
 # Restaurar paquetes NuGet
 dotnet restore
 
-# Estrcutura del Proyecto
+# Compilar solución
+dotnet build
+🗃 Configuración de Base de Datos
+1. Ejecutar Script de Inicialización
+Ejecute el siguiente comando o el archivo ZurichDB/init.sql en SSMS:
+
+bash
+sqlcmd -S [servidor] -U [usuario] -P [contraseña] -d ZurichDB -i ZurichDB/init.sql
+2. Configurar Connection String
+Modificar en appsettings.json:
+
+json
+"ConnectionStrings": {
+  "DefaultConnection": "Server=[servidor];Database=ZurichDB;User Id=[usuario];Password=[contraseña];TrustServerCertificate=true;"
+}
+3. Aplicar Migraciones
+bash
+dotnet ef database update
+🏗 Estructura del Proyecto
+text
 PruebaZurich/
-├── Controllers/          # Endpoints API
-│   ├── AuthController.cs # Autenticación JWT
+├── Controllers/
+│   ├── AuthController.cs
 │   ├── ClientesController.cs
 │   └── PolizasController.cs
 ├── Data/
-│   ├── Context/          # Configuración EF Core
-│   ├── Entities/         # Modelos de BD
-│   ├── Repositories/     # Implementación Repository
-│   └── Initializers/     # Datos iniciales
+│   ├── Context/
+│   ├── Entities/
+│   ├── Repositories/
+│   └── Migrations/
 ├── Models/
-│   └── DTOs/             # Objetos de transferencia
-├── Services/             # Lógica de negocio
-├── Exceptions/           # Excepciones personalizadas
-└── Mapping/              # Perfiles AutoMapper
+│   └── DTOs/
+├── Services/
+├── Exceptions/
+└── Mapping/
+✅ Buenas Prácticas
+Clean Architecture: Separación de capas
 
-# Buenas Prácticas
+Repository Pattern: IRepository<T> genérico
 
-## Implementadas
- - Clean Architecture: Separación clara de responsabilidades
- - Repository Pattern: IRepository<T> con implementación genérica
- - CQRS: Segregación de consultas y comandos
- - DTOs: Transferencia segura de datos
- - Validaciones:
- - DataAnnotations en DTOs
- - FluentValidation para reglas complejas
- - JWT: Autenticación stateless
- - Logging Estructurado: Serilog con enriquecimiento de contexto
- - Migraciones: Control de versiones de esquema
+CQRS: Segregación de consultas/comandos
 
-#-----------------Front End -------------------
+DTOs: Mapeo seguro con AutoMapper
 
+Validaciones: FluentValidation + DataAnnotations
 
-## Índice
+JWT Authentication: Seguridad implementada
 
-* [Instalación](#instalación)
-* [Uso básico](#uso-basico)
-* [Qué incluye](#qué-incluye)
-* [Versionamiento](#Versionamiento)
-* [Servidor de desarrollo](#servidor-de-desarrollo)
-* [Andamiaje de código](#andamiaje-de-código)
-* [Copyright y licencia](#copyright-y-licencia)
-* [Building](#building)
-* [Ejecución de pruebas unitarias](#Ejecución-de-pruebas-unitarias)
-* [Copyright y licencia](#copyright-y-licencia)
+Logging: Serilog con contexto
 
-#### <i>Prerrequisitos</i>
+Migrations: Control de esquema EF Core
 
-Antes de comenzar, asegúrese de que su entorno de desarrollo incluya `Node.js®` y un administrador de paquetes `npm`.
+📡 API Endpoints
+Método	Endpoint	Descripción
+POST	/api/auth/login	Autenticación JWT
+GET	/api/clientes	Listar clientes
+POST	/api/clientes	Crear cliente
+GET	/api/polizas	Listar pólizas
+POST	/api/polizas	Crear póliza
+🤝 Contribución
+Crear issue describiendo los cambios
 
-###### Node.js
+Hacer fork del proyecto
 
-[**Angular 20**](https://angular.io/guide/what-is-angular) requires `Node.js` LTS version `^20.19.0 || ^22.12.0 || ^24.0.0`.
+Crear feature branch (git checkout -b feature/nueva-funcionalidad)
 
-- Para comprobar tu versión, run `node -v` en una ventana terminal/console.
-- Para descargar `Node.js`, ir a [nodejs.org](https://nodejs.org/).
+Hacer commit de los cambios (git commit -am 'Agrega nueva funcionalidad')
 
-###### Angular CLI
+Hacer push al branch (git push origin feature/nueva-funcionalidad)
 
-Instale Angular CLI globalmente usando una ventana terminal/console.
+Abrir Pull Request
 
-```bash
-npm install -g @angular/cli
-```
+📜 Licencia
+Distribuido bajo licencia MIT. Ver LICENSE para más información.
 
-### Instalación
+https://img.shields.io/badge/Angular-20-red
+https://img.shields.io/badge/License-MIT-green
 
-``` bash
-$ npm install
-$ npm update
-```
+Frontend para sistema de gestión de seguros desarrollado con Angular 20.
 
-### Uso básico
+📋 Tabla de Contenidos
+Prerrequisitos
 
-``` bash
-# dev server with hot reload at http://localhost:4200
-$ npm start
-```
+Instalación
 
-Navega a [http://localhost:4200](http://localhost:4200). La aplicación se recargará automáticamente si cambia alguno de los archivos de origen.
+Estructura del Proyecto
 
-#### Build
+Desarrollo
 
-Ejecuta `build` para construir el proyecto. Los artefactos de construcción se almacenarán en el directorio `dist/`.
+Construcción
 
-```bash
-# Construir para producción con minificación
-$ npm run build
-```
+Testing
 
-## Qué incluye
-Verás algo como esto:
+Contribución
 
-```
-prueba-zurich
-├── src/                         # project root
-│   ├── app/                     # directorio principal de la aplicación
-|   │   ├── guards/              # guards para restringir páginas
-|   │   ├── icons/               # conjunto de iconos para la aplicación
-|   │   ├── layout/              # layout 
-|   |   │   └── default-layout/  # layout components
-|   |   |       └── _nav.js      # configuración de navegación de la barra lateral
-|   │   ├── models/              # modelos de la aplicación
-|   │   ├── services/            # servicios de la aplicación
-|   │   ├── shared/              # objetos compartidos
-|   │   ├── store/               # stores para manejo de estado
-|   │   ├── views/               # vistas de la aplicación
-|   │   └── models/              # application models
-│   ├── assets/                  # imagenes, iconos, etc.
-│   ├── scss/                    # estilos scss
-│   └── index.html               # html template
-│
-├── angular.json
-├── README.md
-└── package.json
-```
+Licencia
 
-## Versionamiento
+⚙️ Prerrequisitos
+Tecnología	Versión	Instalación
+Node.js	^20.19.0 || ^22.12.0 || ^24.0.0	Descargar
+Angular CLI	20.x+	npm install -g @angular/cli@20.x
+🚀 Instalación
+bash
+# Clonar repositorio
+git clone https://github.com/Frank95G/PruebaZurich.git
+cd PruebaZurich/ZurichUI
 
-Este proyecto se generó utilizando [Angular CLI](https://github.com/angular/angular-cli) versión 20.0.2.
+# Instalar dependencias
+npm install
 
-## Servidor de desarrollo
-
-Para iniciar un servidor de desarrollo local, ejecute:
-
-```bash
+# Actualizar paquetes
+npm update
+🏗 Estructura del Proyecto
+text
+zurich-frontend/
+├── src/                         
+│   ├── app/                     
+│   │   ├── core/                # Funcionalidades centrales
+│   │   │   ├── guards/          # Protección de rutas
+│   │   │   ├── interceptors/    # Interceptores HTTP
+│   │   │   └── services/        # Servicios globales
+│   │   ├── modules/             # Módulos de funcionalidad
+│   │   │   ├── clientes/        # Gestión de clientes
+│   │   │   └── polizas/         # Gestión de pólizas
+│   │   ├── shared/              # Componentes/compartidos
+│   │   └── layout/              # Estructura visual
+│   ├── assets/                  # Recursos estáticos
+│   ├── environments/            # Configuraciones por entorno
+│   └── styles/                  # Estilos globales
+├── angular.json                 # Configuración Angular CLI
+└── package.json                 # Dependencias
+💻 Desarrollo
+bash
+# Iniciar servidor de desarrollo
 ng serve
-```
 
-Una vez que el servidor esté en funcionamiento, abra su navegador y navegue a `http://localhost:4200/`. La aplicación se recargará automáticamente al modificar cualquier archivo fuente.
+# Acceder en navegador
+http://localhost:4200
+El servidor recargará automáticamente al modificar archivos.
 
-## Andamiaje de código
-
-Angular CLI incluye potentes herramientas de andamiaje de código. Para generar un nuevo componente, ejecute:
-
-```bash
-ng generate component component-name
-```
-
-Para obtener una lista completa de los esquemas disponibles (como `components`, `directives` o `pipes`), ejecute:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-Para construir el proyecto ejecute:
-
-```bash
+🔨 Construcción
+bash
+# Build de desarrollo
 ng build
-```
 
-Esto compilará tu proyecto y almacenará los artefactos de compilación en el directorio `dist/`. De forma predeterminada, la compilación de producción optimiza el rendimiento y la velocidad de tu aplicación.
+# Build de producción (optimizado)
+ng build --configuration production
+Los artefactos se generan en dist/.
 
-## Ejecución de pruebas unitarias
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
+🧪 Testing
+bash
+# Ejecutar pruebas unitarias
 ng test
-```
 
-## Copyright and License
+# Ejecutar pruebas e2e (requiere servidor corriendo)
+ng e2e
+🤝 Contribución
+Crear issue describiendo los cambios propuestos
 
-copyright 2025.
+Hacer fork del proyecto
+
+Crear feature branch (git checkout -b feature/nueva-funcionalidad)
+
+Hacer commit de los cambios (git commit -am 'Agrega nueva funcionalidad')
+
+Hacer push al branch (git push origin feature/nueva-funcionalidad)
+
+Abrir Pull Request
+
+📜 Licencia
+Distribuido bajo licencia MIT. Ver LICENSE para más información.

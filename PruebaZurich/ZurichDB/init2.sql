@@ -1,8 +1,0 @@
-
-PRINT '==== INICIO DEL SCRIPT ====';
-GO
-CREATE DATABASE ZurichDB
-GO
-
-USE ZurichDB;
-GO
