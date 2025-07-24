@@ -66,38 +66,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 var corsConfig = configuration.GetSection("CorsPolicy");
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("DefaultPolicy", policy =>
+    options.AddPolicy("AllowAll", policy =>
     {
-        // 1. Orígenes permitidos (configuración mejorada)
-        var allowedOrigins = corsConfig.GetValue<string[]>("AllowedOrigins") ?? Array.Empty<string>();
-
-        // 2. Agrega automáticamente localhost en desarrollo si no hay orígenes configurados
-        if (builder.Environment.IsDevelopment() && allowedOrigins.Length == 0)
-        {
-            allowedOrigins = new[] { "http://localhost", "http://localhost:4200", "https://localhost:4200" };
-        }
-
-        // 3. Configuración de política
-        if (allowedOrigins.Length > 0)
-        {
-            policy.WithOrigins(allowedOrigins)
-                  .AllowAnyHeader()
-                  .AllowAnyMethod()
-                  .SetPreflightMaxAge(TimeSpan.FromSeconds(
-                      corsConfig.GetValue<int>("PreflightMaxAge", 600)));
-
-            if (corsConfig.GetValue<bool>("AllowCredentials", false))
-            {
-                policy.AllowCredentials();
-            }
-        }
-        else if (builder.Environment.IsDevelopment())
-        {
-            // Solo en desarrollo permite cualquier origen (útil para pruebas)
-            policy.AllowAnyOrigin()
-                  .AllowAnyHeader()
-                  .AllowAnyMethod();
-        }
+        policy.AllowAnyOrigin()  // Permite cualquier dominio
+              .AllowAnyMethod()  // GET, POST, PUT, etc.
+              .AllowAnyHeader(); // Cualquier header
     });
 });
 
@@ -147,7 +120,7 @@ var app = builder.Build();
 app.UseSwagger();
 app.UseSwaggerUI();
 
-app.UseCors("DefaultPolicy");
+app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
 
