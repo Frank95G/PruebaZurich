@@ -68,34 +68,36 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("DefaultPolicy", policy =>
     {
-        var allowedOrigins = corsConfig.GetValue<string[]>("AllowedOrigins") ??
-            (builder.Environment.IsDevelopment()
-                ? new[] { "http://localhost", "http://localhost:4200" }
-                : Array.Empty<string>());
+        // 1. Orígenes permitidos (configuración mejorada)
+        var allowedOrigins = corsConfig.GetValue<string[]>("AllowedOrigins") ?? Array.Empty<string>();
 
+        // 2. Agrega automáticamente localhost en desarrollo si no hay orígenes configurados
+        if (builder.Environment.IsDevelopment() && allowedOrigins.Length == 0)
+        {
+            allowedOrigins = new[] { "http://localhost", "http://localhost:4200", "https://localhost:4200" };
+        }
+
+        // 3. Configuración de política
         if (allowedOrigins.Length > 0)
         {
-            policy.WithOrigins(allowedOrigins);
+            policy.WithOrigins(allowedOrigins)
+                  .AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .SetPreflightMaxAge(TimeSpan.FromSeconds(
+                      corsConfig.GetValue<int>("PreflightMaxAge", 600)));
+
+            if (corsConfig.GetValue<bool>("AllowCredentials", false))
+            {
+                policy.AllowCredentials();
+            }
         }
         else if (builder.Environment.IsDevelopment())
         {
-            policy.AllowAnyOrigin();
+            // Solo en desarrollo permite cualquier origen (útil para pruebas)
+            policy.AllowAnyOrigin()
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
         }
-
-        policy.AllowAnyHeader()
-            .AllowAnyMethod()
-            .SetPreflightMaxAge(TimeSpan.FromSeconds(
-                corsConfig.GetValue<int>("PreflightMaxAge", 600)));
-
-        if (corsConfig.GetValue<bool>("AllowCredentials"))
-        {
-            policy.AllowCredentials();
-        }
-    // options.AddPolicy("AllowAll", policy =>
-    // {
-    //     policy.AllowAnyOrigin()
-    //           .AllowAnyMethod()
-    //           .AllowAnyHeader();
     });
 });
 

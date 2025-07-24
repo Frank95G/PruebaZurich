@@ -3,16 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\franc\\source\\repos\\PruebaZurich\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B4ACAB41-EB32-46B3-AB81-7B12638916EA}|PruebaZurich\\PruebaZurich.csproj|c:\\users\\franc\\source\\repos\\pruebazurich\\pruebazurich\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B4ACAB41-EB32-46B3-AB81-7B12638916EA}|PruebaZurich\\PruebaZurich.csproj|solutionrelative:pruebazurich\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4ACAB41-EB32-46B3-AB81-7B12638916EA}|PruebaZurich\\PruebaZurich.csproj|c:\\users\\franc\\source\\repos\\pruebazurich\\pruebazurich\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{B4ACAB41-EB32-46B3-AB81-7B12638916EA}|PruebaZurich\\PruebaZurich.csproj|solutionrelative:pruebazurich\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{81DDED9D-158B-E303-5F62-77A2896D2A5A}|docker-compose.dcproj|c:\\users\\franc\\source\\repos\\pruebazurich\\docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{81DDED9D-158B-E303-5F62-77A2896D2A5A}|docker-compose.dcproj|solutionrelative:docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{B4ACAB41-EB32-46B3-AB81-7B12638916EA}|PruebaZurich\\PruebaZurich.csproj|c:\\users\\franc\\source\\repos\\pruebazurich\\pruebazurich\\appsettings.production.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{B4ACAB41-EB32-46B3-AB81-7B12638916EA}|PruebaZurich\\PruebaZurich.csproj|solutionrelative:pruebazurich\\appsettings.production.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B4ACAB41-EB32-46B3-AB81-7B12638916EA}|PruebaZurich\\PruebaZurich.csproj|c:\\users\\franc\\source\\repos\\pruebazurich\\pruebazurich\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
@@ -23,8 +15,16 @@
       "RelativeMoniker": "D:0:0:{B4ACAB41-EB32-46B3-AB81-7B12638916EA}|PruebaZurich\\PruebaZurich.csproj|solutionrelative:pruebazurich\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B4ACAB41-EB32-46B3-AB81-7B12638916EA}|PruebaZurich\\PruebaZurich.csproj|c:\\users\\franc\\source\\repos\\pruebazurich\\pruebazurich\\appsettings.production.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{B4ACAB41-EB32-46B3-AB81-7B12638916EA}|PruebaZurich\\PruebaZurich.csproj|solutionrelative:pruebazurich\\appsettings.production.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{B4ACAB41-EB32-46B3-AB81-7B12638916EA}|PruebaZurich\\PruebaZurich.csproj|c:\\users\\franc\\source\\repos\\pruebazurich\\pruebazurich\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B4ACAB41-EB32-46B3-AB81-7B12638916EA}|PruebaZurich\\PruebaZurich.csproj|solutionrelative:pruebazurich\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4ACAB41-EB32-46B3-AB81-7B12638916EA}|PruebaZurich\\PruebaZurich.csproj|c:\\users\\franc\\source\\repos\\pruebazurich\\pruebazurich\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{B4ACAB41-EB32-46B3-AB81-7B12638916EA}|PruebaZurich\\PruebaZurich.csproj|solutionrelative:pruebazurich\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{81DDED9D-158B-E303-5F62-77A2896D2A5A}|docker-compose.dcproj|c:\\users\\franc\\source\\repos\\pruebazurich\\docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{81DDED9D-158B-E303-5F62-77A2896D2A5A}|docker-compose.dcproj|solutionrelative:docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{B4ACAB41-EB32-46B3-AB81-7B12638916EA}|PruebaZurich\\PruebaZurich.csproj|c:\\users\\franc\\source\\repos\\pruebazurich\\pruebazurich\\readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
@@ -69,18 +69,6 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "docker-compose.yml",
-              "DocumentMoniker": "C:\\Users\\franc\\source\\repos\\PruebaZurich\\docker-compose.yml",
-              "RelativeDocumentMoniker": "docker-compose.yml",
-              "ToolTip": "C:\\Users\\franc\\source\\repos\\PruebaZurich\\docker-compose.yml",
-              "RelativeToolTip": "docker-compose.yml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
-              "WhenOpened": "2025-07-21T20:48:33.62Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 9,
               "Title": "launchSettings.json",
               "DocumentMoniker": "C:\\Users\\franc\\source\\repos\\PruebaZurich\\launchSettings.json",
@@ -105,7 +93,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "Dockerfile",
               "DocumentMoniker": "C:\\Users\\franc\\source\\repos\\PruebaZurich\\PruebaZurich\\Dockerfile",
               "RelativeDocumentMoniker": "PruebaZurich\\Dockerfile",
@@ -113,57 +101,71 @@
               "RelativeToolTip": "PruebaZurich\\Dockerfile",
               "ViewState": "AgIAAAQAAAAAAAAAAAAAAA0AAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-07-21T20:29:45.41Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-21T20:29:45.41Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\franc\\source\\repos\\PruebaZurich\\PruebaZurich\\appsettings.json",
               "RelativeDocumentMoniker": "PruebaZurich\\appsettings.json",
               "ToolTip": "C:\\Users\\franc\\source\\repos\\PruebaZurich\\PruebaZurich\\appsettings.json",
               "RelativeToolTip": "PruebaZurich\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAcAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABwAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-07-21T21:06:14.109Z"
+              "WhenOpened": "2025-07-21T21:06:14.109Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\franc\\source\\repos\\PruebaZurich\\PruebaZurich\\Program.cs",
               "RelativeDocumentMoniker": "PruebaZurich\\Program.cs",
               "ToolTip": "C:\\Users\\franc\\source\\repos\\PruebaZurich\\PruebaZurich\\Program.cs",
               "RelativeToolTip": "PruebaZurich\\Program.cs",
-              "ViewState": "AgIAAJMAAAAAAAAAAAAMwLEAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAUwEoAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-21T20:54:28.982Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "appsettings.Production.json",
               "DocumentMoniker": "C:\\Users\\franc\\source\\repos\\PruebaZurich\\PruebaZurich\\appsettings.Production.json",
               "RelativeDocumentMoniker": "PruebaZurich\\appsettings.Production.json",
               "ToolTip": "C:\\Users\\franc\\source\\repos\\PruebaZurich\\PruebaZurich\\appsettings.Production.json",
               "RelativeToolTip": "PruebaZurich\\appsettings.Production.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAACAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABsAAAAGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-07-22T06:23:11.023Z"
+              "WhenOpened": "2025-07-22T06:23:11.023Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "appsettings.Development.json",
               "DocumentMoniker": "C:\\Users\\franc\\source\\repos\\PruebaZurich\\PruebaZurich\\appsettings.Development.json",
               "RelativeDocumentMoniker": "PruebaZurich\\appsettings.Development.json",
               "ToolTip": "C:\\Users\\franc\\source\\repos\\PruebaZurich\\PruebaZurich\\appsettings.Development.json",
               "RelativeToolTip": "PruebaZurich\\appsettings.Development.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAB0AAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-07-21T21:06:17.979Z"
+              "WhenOpened": "2025-07-21T21:06:17.979Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "docker-compose.yml",
+              "DocumentMoniker": "C:\\Users\\franc\\source\\repos\\PruebaZurich\\docker-compose.yml",
+              "RelativeDocumentMoniker": "docker-compose.yml",
+              "ToolTip": "C:\\Users\\franc\\source\\repos\\PruebaZurich\\docker-compose.yml",
+              "RelativeToolTip": "docker-compose.yml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
+              "WhenOpened": "2025-07-21T20:48:33.62Z"
             },
             {
               "$type": "Document",
@@ -175,7 +177,8 @@
               "RelativeToolTip": "docker-compose.dcproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-07-21T20:35:05.189Z"
+              "WhenOpened": "2025-07-21T20:35:05.189Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -187,7 +190,8 @@
               "RelativeToolTip": "PruebaZurich\\Controllers\\AuthController.cs",
               "ViewState": "AgIAABYAAAAAAAAAAAAwwDAAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-22T00:02:59.152Z"
+              "WhenOpened": "2025-07-22T00:02:59.152Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
