@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://pruebazurich-dns.centralus.azurecontainer.io'
+  apiUrl: 'https://pruebazurich-fygsfyb2dxagewfr.canadacentral-01.azurewebsites.net'
 };
