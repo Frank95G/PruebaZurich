@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://tu-backend-dns.region.azurecontainer.io'
+  apiUrl: 'http://pruebazurich-dns.centralus.azurecontainer.io'
 };

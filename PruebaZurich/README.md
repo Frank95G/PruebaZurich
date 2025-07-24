@@ -43,18 +43,21 @@ dotnet build
 
 # 🗃 Configuración de Base de Datos
 
-## 1. Ejecutar Script de Inicialización
-Ejecute el siguiente comando o el archivo ZurichDB/init.sql en SSMS:
+## 1. Configuración de Base de datos
+La base de datos se encuentra en Azure SQL Database y ya no es necesario modificar la conexión a menos que se requiera trabjara en local
+
+El script de creación de base de datos con sus respectivos objetos se encuentra en la carpeta ZurichDB y se llama init.sql
+
+Para ejecutar la bd en un servidor local ejecutar siguiente comando o el archivo ZurichDB/init.sql en SSMS:
 
 sqlcmd -S [servidor] -U [usuario] -P [contraseña] -d ZurichDB -i ZurichDB/init.sql
 
 ## 2. Configurar Connection String
-Modificar en appsettings.json:
+La base de datos se encuentra en Azure SQL Database ya no es necesario modificar la conexión a menos que se requiera trabjara en local
 
-  json
   "ConnectionStrings": {
-    "DefaultConnection": "Server=[servidor];Database=ZurichDB;User Id=[usuario];Password=[contraseña];TrustServerCertificate=true;"
-  }
+    "DefaultConnection": "Server=tcp:serverpaco.database.windows.net,1433;Initial Catalog=ZurichDB;Persist Security Info=False;User ID=paco;Password=Admin123*;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
+ }
 
 ## 3. Aplicar Migraciones
 dotnet ef database update

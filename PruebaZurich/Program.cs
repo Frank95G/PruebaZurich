@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -90,6 +91,11 @@ builder.Services.AddCors(options =>
         {
             policy.AllowCredentials();
         }
+    // options.AddPolicy("AllowAll", policy =>
+    // {
+    //     policy.AllowAnyOrigin()
+    //           .AllowAnyMethod()
+    //           .AllowAnyHeader();
     });
 });
 
@@ -125,16 +131,19 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+if (!builder.Environment.IsDevelopment())
+{
+    // Para producción (Azure) usa puerto 80 en todas las interfaces
+    builder.WebHost.UseUrls("http://*:80");
+}
+
 var app = builder.Build();
 
 // Configuración del Pipeline HTTP
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseCors("DefaultPolicy");
 app.UseAuthentication();
@@ -156,33 +165,56 @@ async Task InitializeDatabase(WebApplication webApp)
     try
     {
         var context = services.GetRequiredService<ZurichDBContext>();
+        var logger = webApp.Logger;
 
         // Aplicar migraciones
         await context.Database.MigrateAsync();
+        logger.LogInformation("Migraciones aplicadas correctamente");
 
-        // Crear usuario admin si no existe
-        if (!await context.Usuarios.AnyAsync(u => u.Email == "admin@test.com"))
+        // Verificar y crear usuario admin con manejo de concurrencia
+        const string adminEmail = "admin@zurich.com";
+        
+        if (!await context.Usuarios.AnyAsync(u => u.Email == adminEmail))
         {
-            var (hash, salt) = CreatePasswordHash("Admin123*");
-
-            context.Usuarios.Add(new Usuario
+            try 
             {
-                NombreUsuario = "admin",
-                Email = "admin@zurich.com",
-                PasswordHash = hash,
-                PasswordSalt = salt,
-                Rol = "Administrador",
-                FechaCreacion = DateTime.UtcNow
-            });
+                var (hash, salt) = CreatePasswordHash("Admin123*");
 
-            await context.SaveChangesAsync();
-            webApp.Logger.LogInformation("Usuario admin creado exitosamente");
+                context.Usuarios.Add(new Usuario
+                {
+                    NombreUsuario = "admin",
+                    Email = adminEmail,
+                    PasswordHash = hash,
+                    PasswordSalt = salt,
+                    Rol = "Administrador",
+                    FechaCreacion = DateTime.UtcNow
+                });
+
+                await context.SaveChangesAsync();
+                logger.LogInformation("Usuario admin creado exitosamente");
+            }
+            catch (DbUpdateException ex) when (IsDuplicateKeyError(ex))
+            {
+                logger.LogWarning("El usuario admin ya existía");
+            }
+        }
+        else
+        {
+            logger.LogInformation("Usuario admin ya existe en la base de datos");
         }
     }
     catch (Exception ex)
     {
         webApp.Logger.LogError(ex, "Error durante la inicialización de la base de datos");
+        throw; // Relanzar para que no pase desapercibido en producción
     }
+}
+
+// Método auxiliar para detectar errores de clave duplicada
+bool IsDuplicateKeyError(DbUpdateException ex)
+{
+    return ex.InnerException is SqlException sqlEx && 
+           (sqlEx.Number == 2601 || sqlEx.Number == 2627);
 }
 
 (byte[] hash, byte[] salt) CreatePasswordHash(string password)

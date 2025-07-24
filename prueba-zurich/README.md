@@ -24,7 +24,8 @@
 
 # Clonar repositorio
 git clone https://github.com/Frank95G/PruebaZurich.git
-cd PruebaZurich/ZurichUI
+
+cd prueba-zurich
 
 # Instalar dependencias
 npm install
