@@ -91,6 +91,26 @@ PruebaZurich/
 │   └── init.sql                  # Script de inicialización de BD
 └── obj/                          # Objetos temporales de compilación
   
+# ▶️ Configuración del Backend (API)
+## Iniciar la aplicación con IIS Express
+1. Abrir el proyecto en Visual Studio
+
+2. Selecciona PruebaZurich como proyecto de inicio único.
+
+  Esto iniciará automáticamente la aplicación usando IIS Express en el puerto configurado (44359).
+
+  URL de acceso
+  Una vez ejecutado, la API estará disponible en:
+  https://localhost:44359/swagger/index.html
+
+## Manejo de puertos alternativos
+Si el puerto 44359 está ocupado y la aplicación se inicia con un puerto diferente:
+
+1. Actualizar el Frontend
+Modifica el archivo environment.ts en tu proyecto Angular para reflejar el nuevo puerto:
+
+apiUrl: 'https://localhost:[nuevo-puerto]/api'
+
 # ✅ Buenas Prácticas
 Clean Architecture: Separación de capas
 
